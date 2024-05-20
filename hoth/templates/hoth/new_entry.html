@@ -1,0 +1,64 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div>
+    <h1>New Entry For Logbook</h1>
+<form method="POST" action="" class="container border border-primary border-5 gx-5 gy-5">
+    <h3 class="form-label">New Entry</h3>
+    {% csrf_token %}
+<label>Date</label>
+    {{new_entry.date}}
+<label>Aircraft Model</label>
+    {{new_entry.equip}}
+<label>Aircraft Registration</label>
+    {{new_entry.registration}}
+<div class="row">
+    <div class="col">
+        <label>Origin</label>
+    {{new_entry.origin}}
+</div>
+<div class="col">
+    <label>Destination</label>
+    {{new_entry.destination}}
+</div>
+    </div>
+<label>Airplane Single Engine Land</label>
+    {{new_entry.airplane_sel}}
+<label>Airplane Multi Engine Land</label>
+    {{new_entry.airplane_mel}}
+<label>As CFI</label>
+    {{new_entry.airplane_cfi}}
+<label>Cross Country</label>
+    {{new_entry.x_country}}
+<label>Night</label>
+    {{new_entry.night}}
+<label>Actual IFR</label>
+    {{new_entry.act_ifr}}
+<label>Simulated IFR</label>
+    {{new_entry.sim_ifr}}
+<label>Ground Trainer</label>
+    {{new_entry.gnd_trainer}}
+<label>Pilot in Command</label>
+    {{new_entry.pic}}
+<label>Second in Command</label>
+    {{new_entry.sic}}
+<label>Dual Received</label>
+    {{new_entry.dual}}
+<label>Total Duration of Flight</label>
+    {{new_entry.totalt}}
+<label>Synthetic Trainer</label>
+    {{new_entry.synth_trainer}}
+<label>Remarks or Comments</label>
+    {{new_entry.remarks}}
+<input type="submit" class="btn btn-primary bg-gradient container text-center my-3" name="Submit" value="Record"/>
+
+</form>
+    <datalist id="airports">
+        {% for x in airport_datalist %}
+        <option>{{x.iata_id}}</option>
+        {% endfor %}
+    </datalist>
+</div>
+
+
+{% endblock %}

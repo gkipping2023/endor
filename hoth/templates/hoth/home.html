@@ -1,0 +1,99 @@
+{% extends 'main.html' %}
+{% block content %}
+<a href="{% url 'logbook' %}">Logbook</a>
+<a href="{% url 'new_entry' %}">New Entry</a>
+<h1>Logbook Dashboard</h1>
+<h3>Last 30 days: {{last_30_days}}</h3>
+<h3>Last 90 days: {{last_90_days}}</h3>
+<h3>Last 365 days: {{last_365_days}}</h3>
+<h1>Last 30 days</h1>
+<table class=" table table-sm table-success table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Equip</th>
+        <th scope="col">Registration</th>
+        <th scope="col">Origin</th>
+        <th scope="col">Destination</th>
+        <th scope="col">Airplane SEL</th>
+        <th scope="col">Airplane MEL</th>
+        <th scope="col">Airplane CFI</th>
+        <th scope="col">Crosscountry</th>
+        <th scope="col">Night</th>
+        <th scope="col">Actual IFR</th>
+        <th scope="col">Simulated IFR</th>
+        <th scope="col">Ground Trainer</th>
+        <th scope="col">Synthetic Trainer</th>
+        <th scope="col">Pic</th>
+        <th scope="col">SIC</th>
+        <th scope="col">Dual Time</th>
+        <th scope="col">Total Time</th>
+        <th scope="col">Remarks</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for log in log_30_days %}
+      <tr>
+        <td>{{log.date}}</td>
+        <td>{{log.equip}}</td>
+        <td>{{log.registration}}</td>
+        <td>{{log.origin}}</td>
+        <td>{{log.destination}}</td>
+        <td>{{log.airplane_sel}}</td>
+        <td>{{log.airplane_mel}}</td>
+        <td>{{log.airplane_cfi}}</td>
+        <td>{{log.x_country}}</td>
+        <td>{{log.night}}</td>
+        <td>{{log.act_ifr}}</td>
+        <td>{{log.sim_ifr}}</td>
+        <td>{{log.gnd_trainer}}</td>
+        <td>{{log.synth_trainer}}</td>
+        <td>{{log.pic}}</td>
+        <td>{{log.sic}}</td>
+        <td>{{log.dual}}</td>
+        <td>{{log.totalt}}</td>
+        <td>{{log.remarks}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    <tfoot class="table-dark fw-bold">
+      <strong>
+        <tr>
+          <td colspan="3">Total last 30 Days</td>
+          <td colspan="2"></td>
+          <td>{{homet_asel}}</td>
+          <td>{{homet_amel}}</td>
+          <td>{{homet_cfi}}</td>
+          <td>{{homet_xc}}</td>
+          <td>{{homet_night}}</td>
+          <td>{{homet_act_ifr}}</td>
+          <td>{{homet_sim_ifr}}</td>
+          <td>{{homet_gnd_trainer}}</td>
+          <td>{{homet_synth_trainer}}</td>
+          <td>{{homet_pic}}</td>
+          <td>{{homet_sic}}</td>
+          <td>{{homet_dual}}</td>
+          <td>{{last_30_days}}</td>
+          <td colspan="1"></td>
+        </tr>
+      </strong>
+    </tfoot>
+  </table>
+
+<h4>Total Flight Time: </h4><p>{{total_flight}} / {{up_totales}}</p>
+<h4>Boeing 737: </h4><p>{{total_737}} / {{up_b737}}</p>
+<h4>Piper PA-28 Cherokee: </h4><p>{{total_pa28}}</p>
+<h4>As Second in Command: </h4><p>{{total_sic}}</p>
+<h4>As Pilot in Command: </h4><p>{{total_pic}}</p>
+<h4>As Flight Instructor: </h4><p>{{total_cfi}}</p>
+<h4>Synthetic Trainer: </h4><p>{{total_sim}}</p>
+<section>
+  <h3>Para Upgrade:
+    <p> Faltan: {{rem_total}} Totales. Con Credito de SIM y FTD-A {{rem_total_cr}}</p>
+    <p> Faltan: {{rem_b737}} de Boeing 737</p>
+    <p> Faltan: {{rem_cm}} en la Compania</p>
+  </h3>
+</section>
+
+
+{% endblock %}

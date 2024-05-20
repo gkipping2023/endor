@@ -1,0 +1,81 @@
+{% extends 'main.html' %}
+{% block content %}
+<h1>LOGBOOK!</h1>
+<a href="{% url 'home' %}">Home</a>
+<form>
+  <label>From: </label>
+  <input type="date" id="from" name="from" value="2024-03-01">
+  <label>To: </label>
+  <input type="date" id="to" name="to" value="2024-04-14">
+  <input type="submit" value="Buscar">
+</form>
+<table class="table table-sm table-success table-striped">
+  {% if date_from is not None %}
+  <h2>Entries from {{date_from}} to {{date_to}}</h2>
+  {% endif %}
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Enntry ID</th>
+        <th scope="col">Date</th>
+        <th scope="col">Equip</th>
+        <th scope="col">Registration</th>
+        <th scope="col">Origin</th>
+        <th scope="col">Destination</th>
+        <th scope="col">Airplane SEL</th>
+        <th scope="col">Airplane MEL</th>
+        <th scope="col">Airplane CFI</th>
+        <th scope="col">Crosscountry</th>
+        <th scope="col">Night</th>
+        <th scope="col">Actual IFR</th>
+        <th scope="col">Simulated IFR</th>
+        <th scope="col">Ground Trainer</th>
+        <th scope="col">Synthetic Trainer</th>
+        <th scope="col">Pic</th>
+        <th scope="col">SIC</th>
+        <th scope="col">Dual Time</th>
+        <th scope="col">Total Time</th>
+        <th scope="col">Remarks</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for log in logbook_search %}
+      <tr>
+        <td>{{log.id}}</td>
+        <td>{{log.date}}</td>
+        <td>{{log.equip}}</td>
+        <td>{{log.registration}}</td>
+        <td>{{log.origin}}</td>
+        <td>{{log.destination}}</td>
+        <td>{{log.airplane_sel}}</td>
+        <td>{{log.airplane_mel}}</td>
+        <td>{{log.airplane_cfi}}</td>
+        <td>{{log.x_country}}</td>
+        <td>{{log.night}}</td>
+        <td>{{log.act_ifr}}</td>
+        <td>{{log.sim_ifr}}</td>
+        <td>{{log.gnd_trainer}}</td>
+        <td>{{log.synth_trainer}}</td>
+        <td>{{log.pic}}</td>
+        <td>{{log.sic}}</td>
+        <td>{{log.dual}}</td>
+        <td>{{log.totalt}}</td>
+        <td>{{log.remarks}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    <a href="{% url 'pdf_test' %}">Print</a>
+  </table>
+  <br/><br/><hr><br/>
+<!-- PAGINATION  
+  {% if xyz.has_previous %}
+  <a href="?page=1">&laquo First</a>
+  <a href="?page={{ xyz.previous_page_number }}">Previous</a>
+{% endif %}
+
+Page {{xyz.number}} of {{xyz.paginator.num_pages}}
+
+{% if xyz.has_next %}
+  <a href="?page={{ xyz.next_page_number }}">Next</a>
+  <a href="?page={{ xyz.paginator.num_pages }}">Last &raquo</a>
+{% endif %} -->
+{% endblock content %}
