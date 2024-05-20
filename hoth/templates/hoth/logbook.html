@@ -41,7 +41,7 @@
         {% for log in logbook_search %}
       <tr>
         <td>{{log.id}}</td>
-        <td>{{log.date}}</td>
+        <td>{{log.date|date:'Y, M d'}}</td>
         <td>{{log.equip}}</td>
         <td>{{log.registration}}</td>
         <td>{{log.origin}}</td>
