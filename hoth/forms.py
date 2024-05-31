@@ -7,7 +7,7 @@ from datetime import date
 class new_entry_form(ModelForm):
     date = forms.DateField(label='Fecha',initial=date.today(),widget=forms.DateInput(attrs={'class':'form-control','type':'date'}))
     equip = forms.CharField(max_length=250,label='C172',empty_value=None,widget=forms.TextInput(attrs={'class':'form-control'}))
-    registration = forms.CharField(max_length=50,initial='HP1234',empty_value=None,widget=forms.TextInput(attrs={'class':'form-control'}))
+    registration = forms.CharField(max_length=50,initial='HP1234',empty_value=None,widget=forms.TextInput(attrs={'class':'form-control','id':'block1','oninput':'myFunction()'}))
     origin = forms.CharField(max_length=80, label='Origen',empty_value=None,widget=forms.TextInput(attrs={'class':'form-control','list':'airports'})) #Dropdown de Airports
     destination = forms.CharField(max_length=80, label= 'Destination',empty_value=None,widget=forms.TextInput(attrs={'class':'form-control','list':'airports'})) #Dropdown de Airports
     airplane_sel = forms.DecimalField(max_digits=15,decimal_places=2,required=False,initial=0,widget=forms.NumberInput(attrs={'class':'form-control'}))

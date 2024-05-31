@@ -24,7 +24,7 @@ def home(request):
     last_90_days = round(Logbook.objects.filter(date__gte=last_90).aggregate(Sum('totalt'))['totalt__sum'],2)
     last_365_days = round(Logbook.objects.filter(date__gte=last_365).aggregate(Sum('totalt'))['totalt__sum'],2)
     last_30_days = round(Logbook.objects.filter(date__gte=last_30).aggregate(Sum('totalt'))['totalt__sum'],2)
-    log_30_days = Logbook.objects.filter(date__gte=last_30)
+    log_30_days = Logbook.objects.all().order_by('-date')[0:10]
     total_flight = round(Logbook.objects.aggregate(Sum('totalt'))['totalt__sum'],2)
     total_737 = round(Logbook.objects.filter(equip__startswith='7').aggregate(Sum('totalt'))['totalt__sum'],2)
     total_pa28 = round(Logbook.objects.filter(equip__startswith='PA28').aggregate(Sum('totalt'))['totalt__sum'],2)
@@ -44,6 +44,16 @@ def home(request):
     homet_sic = round(Logbook.objects.filter(date__gte=last_30).aggregate(Sum('sic'))['sic__sum'],2)
     homet_dual = round(Logbook.objects.filter(date__gte=last_30).aggregate(Sum('dual'))['dual__sum'],2)
     homet_synth_trainer = round(Logbook.objects.filter(date__gte=last_30).aggregate(Sum('synth_trainer'))['synth_trainer__sum'],2)
+    #Chart
+    months = [1,2,3,4,5,6,7,8,9,10,11,12]
+    months_data = []
+    for x in months:
+        dataset = Logbook.objects.filter(date__year=now_y).filter(date__month=x).aggregate(Sum('totalt'))['totalt__sum']
+        if dataset is None:
+            dataset = 0
+            months_data.append(dataset)
+        else:
+            months_data.append(int(dataset)) # use int b/c SQLite does not support Float
 
     up_totales = 4000
     up_b737 = 3000
@@ -59,6 +69,9 @@ def home(request):
         rem_cm = up_cm - total_737
 
     return render(request, 'hoth/home.html',{
+        'dataset': dataset,
+        'months_data':months_data,
+        'months' : months,
         'homet_synth_trainer':homet_synth_trainer,
         'homet_dual':homet_dual,
         'homet_sic':homet_sic,
@@ -140,3 +153,6 @@ def render_pdf_view(request):
     if pisa_status.err:
        return HttpResponse('We had some errors <pre>' + html + '</pre>')
     return response
+
+def time_calc(request):
+    return render(request,'hoth/time_calc.html')

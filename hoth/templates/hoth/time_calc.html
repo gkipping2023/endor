@@ -1,0 +1,20 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<script src="{% static 'main.js' %}"></script>
+<div class="container border-primary">
+    <h2 class="text text-center">Time Calculator</h2>
+    <h3 class="text text-center">Use this page to convert time from HH:MM to Decimals</h3>
+    <div class="row">
+        <div class="col">
+            <input type="text" id="block1" oninput="myFunction()">Enter time in "HH:mm"
+        </div>
+        <div class="col">
+            <p id="demo">Result:</p>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

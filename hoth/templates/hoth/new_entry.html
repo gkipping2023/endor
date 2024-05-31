@@ -1,4 +1,5 @@
 {% extends 'main.html' %}
+{% load static %}
 {% block content %}
 
 <div>
@@ -26,6 +27,10 @@
     {{new_entry.airplane_sel}}
 <label>Airplane Multi Engine Land</label>
     {{new_entry.airplane_mel}}
+    <label>Decimal Block</label>
+    <p class="text" id="demo"></p></br>
+    <script src="{% static 'main.js' %}">
+    </script>
 <label>As CFI</label>
     {{new_entry.airplane_cfi}}
 <label>Cross Country</label>
