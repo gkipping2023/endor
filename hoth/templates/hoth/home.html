@@ -36,81 +36,101 @@
     </div>
     </div>
   </div>
+  <div class="row">
+    <h2 class="text">Totals:</h2>
+    <div class="col">
+      <div class="card border-success mb-2">
+        <div class="card-header p-3 pt-3">
+            <div class="text-center pt-1">
+                <p class="text-sm mb-0 text-capitalize text-success">Flight Time:</p>
+                <h4 class="mb-0 text-success">{{total_flight}}</h4>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="col">
+      <div class="card border-success mb-2">
+        <div class="card-header p-3 pt-3">
+            <div class="text-center pt-1">
+                <p class="text-sm mb-0 text-capitalize text-success">As First Officer:</p>
+                <h4 class="mb-0 text-success">{{total_737}}</h4>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="col">
+      <div class="card border-success mb-2">
+        <div class="card-header p-3 pt-3">
+            <div class="text-center pt-1">
+                <p class="text-sm mb-0 text-capitalize text-success">Synthetic Trainer:</p>
+                <h4 class="mb-0 text-success">{{total_sim}}</h4>
+            </div>
+        </div>
+    </div>
+    </div>
+  </div>
 </div>
-<div style="overflow-x:auto">
-  <h1>Last 10 Entries:</h1>
-  <table class=" table table-sm table-responsive table-light table-striped">
-    <thead class="table-dark">
-      <tr>
-        <th scope="col">Date</th>
-        <th scope="col">Equip</th>
-        <th scope="col">Registration</th>
-        <th scope="col">Origin</th>
-        <th scope="col">Destination</th>
-        <th scope="col">Airplane SEL</th>
-        <th scope="col">Airplane MEL</th>
-        <th scope="col">Airplane CFI</th>
-        <th scope="col">Crosscountry</th>
-        <th scope="col">Night</th>
-        <th scope="col">Actual IFR</th>
-        <th scope="col">Simulated IFR</th>
-        <th scope="col">Ground Trainer</th>
-        <th scope="col">Synthetic Trainer</th>
-        <th scope="col">Pic</th>
-        <th scope="col">SIC</th>
-        <th scope="col">Dual Time</th>
-        <th scope="col">Total Time</th>
-        <th scope="col">Remarks</th>
-      </tr>
-    </thead>
-    <tbody>
-        {% for log in log_30_days %}
-      <tr>
-        <td>{{log.date|date:'m/d/y'}}</td> 
-        <td>{{log.equip}}</td>
-        <td>{{log.registration}}</td>
-        <td>{{log.origin}}</td>
-        <td>{{log.destination}}</td>
-        <td>{{log.airplane_sel}}</td>
-        <td>{{log.airplane_mel}}</td>
-        <td>{{log.airplane_cfi}}</td>
-        <td>{{log.x_country}}</td>
-        <td>{{log.night}}</td>
-        <td>{{log.act_ifr}}</td>
-        <td>{{log.sim_ifr}}</td>
-        <td>{{log.gnd_trainer}}</td>
-        <td>{{log.synth_trainer}}</td>
-        <td>{{log.pic}}</td>
-        <td>{{log.sic}}</td>
-        <td>{{log.dual}}</td>
-        <td>{{log.totalt}}</td>
-        <td style="max-width: auto; margin:auto">{{log.remarks}}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-    <tfoot class="table-dark fw-bold">
-      <strong>
+<div class="container-fluid">
+  <div style="overflow-x:auto">
+    <h1>Last 10 Entries:</h1>
+    <table class=" table table-sm table-responsive table-light table-striped">
+      <thead class="table-dark">
         <tr>
-          <td colspan="3">Total last 30 Days</td>
-          <td colspan="2"></td>
-          <td>{{homet_asel}}</td>
-          <td>{{homet_amel}}</td>
-          <td>{{homet_cfi}}</td>
-          <td>{{homet_xc}}</td>
-          <td>{{homet_night}}</td>
-          <td>{{homet_act_ifr}}</td>
-          <td>{{homet_sim_ifr}}</td>
-          <td>{{homet_gnd_trainer}}</td>
-          <td>{{homet_synth_trainer}}</td>
-          <td>{{homet_pic}}</td>
-          <td>{{homet_sic}}</td>
-          <td>{{homet_dual}}</td>
-          <td>{{last_30_days}}</td>
-          <td colspan="1"></td>
+          <th scope="col">Date</th>
+          <th scope="col">Aircraft Type</th>
+          <th scope="col">Registration</th>
+          <th scope="col">Origin</th>
+          <th scope="col">Destination</th>
+          <th scope="col">Airplane SEL</th>
+          <th scope="col">Airplane MEL</th>
+          <th scope="col">Night</th>
+          <th scope="col">Actual IFR</th>
+          <th scope="col">Synthetic Trainer</th>
+          <th scope="col">PIlot in Command</th>
+          <th scope="col">Second in Command</th>
+          <th scope="col">Total Time</th>
+          <th scope="col">Remarks</th>
         </tr>
-      </strong>
-    </tfoot>
-  </table>
+      </thead>
+      <tbody>
+          {% for log in log_30_days %}
+        <tr>
+          <td>{{log.date|date:'m-d-Y'}}</td> 
+          <td>{{log.equip}}</td>
+          <td>{{log.registration}}</td>
+          <td>{{log.origin}}</td>
+          <td>{{log.destination}}</td>
+          <td>{{log.airplane_sel}}</td>
+          <td>{{log.airplane_mel}}</td>
+          <td>{{log.night}}</td>
+          <td>{{log.act_ifr}}</td>
+          <td>{{log.synth_trainer}}</td>
+          <td>{{log.pic}}</td>
+          <td>{{log.sic}}</td>
+          <td class="fw-bold">{{log.totalt}}</td>
+          <td style="max-width: auto; margin:auto">{{log.remarks}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot class="table-dark fw-bold">
+        <strong>
+          <tr>
+            <td colspan="3">Total last 30 Days</td>
+            <td colspan="2"></td>
+            <td>{{homet_asel}}</td>
+            <td>{{homet_amel}}</td>
+            <td>{{homet_night}}</td>
+            <td>{{homet_act_ifr}}</td>
+            <td>{{homet_synth_trainer}}</td>
+            <td>{{homet_pic}}</td>
+            <td>{{homet_sic}}</td>
+            <td>{{last_30_days}}</td>
+            <td colspan="1"></td>
+          </tr>
+        </strong>
+      </tfoot>
+    </table>
+  </div>
 </div>
 <div class="container">
   
@@ -120,24 +140,7 @@
       <div>
         <canvas id="myChart"></canvas>
       </div>
-    </div>
-    <div class="col">
-      <h2 class="text text-center">Upgrade Progress</h2>
-          <ul>
-            <li>
-              <h4>Total Hours</h4>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 5%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{total_flight}}</div>
-              </div>
-            </li>
-            <li>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-              </div>
-            </li>
-          </ul>
-    </div>
-      
+    </div>    
       <script>
         const ctx = document.getElementById('myChart');
       
@@ -151,10 +154,10 @@
             },{
               type: 'line',
               label: '80h Goal',
-              data: [80,80,80,80,80,80,80,80,80,80,80,80,]
+              data: [80,80,80,80,80,80,80,80,80,80,80,80]
             }
           ],
-            labels : ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Nov','Dec'],
+            labels : ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
           },
           options: {
             scales: {
@@ -170,18 +173,12 @@
 </div>
 
 <div class="container">
-<h4>Total Flight Time: </h4><p>{{total_flight}} / {{up_totales}}</p>
-<h4>Boeing 737: </h4><p>{{total_737}} / {{up_b737}}</p>
-<h4>Piper PA-28 Cherokee: </h4><p>{{total_pa28}}</p>
-<h4>As Second in Command: </h4><p>{{total_sic}}</p>
-<h4>As Pilot in Command: </h4><p>{{total_pic}}</p>
-<h4>As Flight Instructor: </h4><p>{{total_cfi}}</p>
-<h4>Synthetic Trainer: </h4><p>{{total_sim}}</p>
 <section>
-  <h3>Para Upgrade:
+  <h3>Para Upgrade Today {{rem_mo}}:
     <p> Faltan: {{rem_total}} Totales. Con Credito de SIM y FTD-A {{rem_total_cr}}</p>
     <p> Faltan: {{rem_b737}} de Boeing 737</p>
     <p> Faltan: {{rem_cm}} en la Compania</p>
+    <p> Minimo Mensual: {{min_mo_avr}}</p>
   </h3>
 </section>
 </div>
