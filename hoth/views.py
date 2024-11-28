@@ -7,7 +7,7 @@ import calendar
 from django.http import HttpResponse
 from django.conf import settings
 from django.template.loader import get_template
-from xhtml2pdf import pisa
+#from xhtml2pdf import pisa
 from .forms import new_entry_form, newUser_form
 from django.core.paginator import Paginator
 
@@ -27,7 +27,7 @@ def home(request):
     try:
         last_90_days = round(Logbook.objects.filter(date__gte=last_90).aggregate(Sum('totalt'))['totalt__sum'],2)
     except:
-        last_30_days = 0.00
+        last_90_days = 0.00
     try:
         last_365_days = round(Logbook.objects.filter(date__gte=last_365).aggregate(Sum('totalt'))['totalt__sum'],2)
     except:
@@ -188,24 +188,24 @@ def logbook(request):
         'date_to':date_to,
         })
 
-def render_pdf_view(request):
-    last_30 = datetime.now() - timedelta(days=30)
-    template_path = 'hoth/pdf1.html'
-    context = {'myvar': Logbook.objects.filter(date__gte=last_30)}
-    # Create a Django response object, and specify content_type as pdf
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'filename="report.pdf"'
-    # find the template and render it.
-    template = get_template(template_path)
-    html = template.render(context)
+# def render_pdf_view(request):
+#     last_30 = datetime.now() - timedelta(days=30)
+#     template_path = 'hoth/pdf1.html'
+#     context = {'myvar': Logbook.objects.filter(date__gte=last_30)}
+#     # Create a Django response object, and specify content_type as pdf
+#     response = HttpResponse(content_type='application/pdf')
+#     response['Content-Disposition'] = 'filename="report.pdf"'
+#     # find the template and render it.
+#     template = get_template(template_path)
+#     html = template.render(context)
 
-    # create a pdf
-    pisa_status = pisa.CreatePDF(
-       html, dest=response)
-    # if error then show some funny view
-    if pisa_status.err:
-       return HttpResponse('We had some errors <pre>' + html + '</pre>')
-    return response
+#     # create a pdf
+#     pisa_status = pisa.CreatePDF(
+#        html, dest=response)
+#     # if error then show some funny view
+#     if pisa_status.err:
+#        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+#     return response
 
 def time_calc(request):
     return render(request,'hoth/time_calc.html')

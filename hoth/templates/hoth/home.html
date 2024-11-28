@@ -74,44 +74,38 @@
   <div style="overflow-x:auto">
     <h1>Last 10 Entries:</h1>
     <table class=" table table-sm table-responsive table-light table-striped">
-      <thead class="table-dark">
-        <tr>
-          <th scope="col">Date</th>
-          <th scope="col">Aircraft Type</th>
-          <th scope="col">Registration</th>
-          <th scope="col">Origin</th>
-          <th scope="col">Destination</th>
-          <th scope="col">Airplane SEL</th>
-          <th scope="col">Airplane MEL</th>
-          <th scope="col">Night</th>
-          <th scope="col">Actual IFR</th>
-          <th scope="col">Synthetic Trainer</th>
-          <th scope="col">PIlot in Command</th>
-          <th scope="col">Second in Command</th>
-          <th scope="col">Total Time</th>
-          <th scope="col">Remarks</th>
-        </tr>
-      </thead>
       <tbody>
           {% for log in log_30_days %}
         <tr>
-          <td>{{log.date|date:'m-d-Y'}}</td> 
-          <td>{{log.equip}}</td>
-          <td>{{log.registration}}</td>
-          <td>{{log.origin}}</td>
-          <td>{{log.destination}}</td>
-          <td>{{log.airplane_sel}}</td>
-          <td>{{log.airplane_mel}}</td>
-          <td>{{log.night}}</td>
-          <td>{{log.act_ifr}}</td>
-          <td>{{log.synth_trainer}}</td>
-          <td>{{log.pic}}</td>
-          <td>{{log.sic}}</td>
-          <td class="fw-bold">{{log.totalt}}</td>
-          <td style="max-width: auto; margin:auto">{{log.remarks}}</td>
+        <div class="container text-center">
+  <div class="row">
+    <div class="col h3">
+      {{log.origin}}
+    </div>
+    <div class="col h6 fw-lighter">
+      {{log.date|date:'M-d-Y'}}
+    </div>
+    <div class="col h3">
+      {{log.destination}}
+    </div>
+  </div>
+  <div class="row border-bottom">
+    <div class="col">
+      {{log.registration}}
+    </div>
+    <div class="col fw-bold">
+      {{log.totalt}}
+    </div>
+    <div class="col">
+      {{log.equip}}
+    </div>
+  </div>
+</div>
         </tr>
+        </tbody>
         {% endfor %}
-      </tbody>
+      
+      
       <tfoot class="table-dark fw-bold">
         <strong>
           <tr>
@@ -153,8 +147,8 @@
               borderWidth: 1
             },{
               type: 'line',
-              label: '80h Goal',
-              data: [80,80,80,80,80,80,80,80,80,80,80,80]
+              label: 'Minimun monthly Average',
+              data: [{{min_mo_avr}},{{min_mo_avr}},{{min_mo_avr}},{{min_mo_avr}},{{min_mo_avr}},{{min_mo_avr}},{{min_mo_avr}},{{min_mo_avr}},{{min_mo_avr}},{{min_mo_avr}},{{min_mo_avr}},{{min_mo_avr}},]
             }
           ],
             labels : ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
@@ -170,11 +164,13 @@
         });
       </script>
   </div>
+  <h2>Print</h2>
+  <button onclick="window.print()">Print this page</button>
 </div>
 
 <div class="container">
 <section>
-  <h3>Para Upgrade Today {{rem_mo}}:
+  <h3>Para Upgrade: Faltando {{rem_mo}} meses:
     <p> Faltan: {{rem_total}} Totales. Con Credito de SIM y FTD-A {{rem_total_cr}}</p>
     <p> Faltan: {{rem_b737}} de Boeing 737</p>
     <p> Faltan: {{rem_cm}} en la Compania</p>
@@ -182,6 +178,5 @@
   </h3>
 </section>
 </div>
-
 
 {% endblock %}
